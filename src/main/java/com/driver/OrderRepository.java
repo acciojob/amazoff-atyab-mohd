@@ -57,8 +57,8 @@ public class OrderRepository {
 
     public Integer getCount(String partnerId) {
         int count = 0;
-        if(pairMap.containsKey(partnerId)){
-            count = pairMap.get(partnerId).size();
+        if(partnerMap.containsKey(partnerId)){
+            count = partnerMap.get(partnerId).getNumberOfOrders();
         }
         return count;
     }
@@ -66,6 +66,7 @@ public class OrderRepository {
     public List<String> getLists(String partnerId) {
         List<String> count = new ArrayList<>();
         if(pairMap.containsKey(partnerId)){
+            //List<Order> orders = pairMap.get(partnerId);
             //count = pairMap.get(partnerId);
             for(Order order : pairMap.get(partnerId)){
                 count.add(order.getId());
@@ -86,12 +87,20 @@ public class OrderRepository {
         //int count = 0;
         //count = orderMapUn.size();
         return orderMapUn.size();//count;
+//        for(String s : orderMap.keySet()){
+//            for(List<Order> orders : pairMap.values()){
+//                for(Order order : orders){
+//                    if(order.getId().equals(s)) count++;
+//                }
+//            }
+//        }
+//        return orderMapUn.size();
     }
 
     public Integer ordersLeft(String time, String partnerId) {
         int count = 0;
         String hour = time.substring(0,2);
-        String min = time.substring(3);
+        String min = time.substring(3,5);
         int givenTime = Integer.parseInt(hour) * 60 + Integer.parseInt(min);
         if(pairMap.containsKey(partnerId)){
             for(Order order : pairMap.get(partnerId)){
