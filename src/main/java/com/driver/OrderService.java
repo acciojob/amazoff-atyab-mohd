@@ -7,60 +7,66 @@ import java.util.List;
 
 @Service
 public class OrderService {
-    @Autowired
-    OrderRepository orderRepository;
 
-    public void addOrder(Order order) {
-        orderRepository.addOrder(order);
+    //    @Autowired
+//    OrderRepository orderRepository;
+    OrderRepository orderRepository = new OrderRepository();
+
+    public void addOrderService(Order order){
+        orderRepository.addOrderToDb(order);
     }
 
-    public void addPartner(String partnerId) {
-        orderRepository.addPartner(partnerId);
+    public void addPartnerService(String partnerId){
+        orderRepository.addPartnerToDb(partnerId);
     }
 
-    public void addPair(String orderId, String partnerId) {
-        orderRepository.addPair(orderId, partnerId);
+    public void addOrderPartnerPairService(String orderId,String partnerId){
+        orderRepository.addOrderPartnerPairToDb(orderId,partnerId);
     }
 
-    public Order getOrder(String orderId) {
-        return orderRepository.getOrder(orderId);
+    public Order getOrderById(String orderId){
+        return orderRepository.getOrderById(orderId);
+    }
+    public DeliveryPartner getPartnerById(String partnerId){
+        return orderRepository.getPartnerById(partnerId);
     }
 
-    public DeliveryPartner getPartner(String partnerId) {
-        return orderRepository.getPartner(partnerId);
+    public int getOrderCountByPartnerId(String partnerId){
+        return orderRepository.getOrderCountByPartnerId(partnerId);
     }
 
-    public Integer getCount(String partnerId) {
-        return orderRepository.getCount(partnerId);
+    public List<String> getOrdersByPartnerId(String partnerId){
+        return orderRepository.getOrdersByPartnerId(partnerId);
     }
 
-    public List<String> getLists(String partnerId) {
-        return orderRepository.getLists(partnerId);
-    }
-
-    public List<String> getAllOrders() {
+    public List<String> getAllOrders(){
         return orderRepository.getAllOrders();
     }
 
-    public Integer getCountUnOrders() {
-        return orderRepository.getCountUnOrders();
+    public int getCountOfUnassignedOrders(){
+        return orderRepository.getCountOfUnassignedOrders();
     }
 
-    public Integer ordersLeft(String time, String partnerId) {
-        return orderRepository.ordersLeft(time, partnerId);
+    public int getOrdersLeftAfterGivenTimeByPartnerId(String time,String partnerId){
+        return orderRepository.getOrdersLeftAfterGivenTimeByPartnerId(time,partnerId);
     }
 
-    public String getLastTime(String partnerId) {
-        return orderRepository.lastTime(partnerId);
+    public String getLastDeliveryTimeByPartnerId(String partnerId){
+        return orderRepository.getLastDeliveryTimeByPartnerId(partnerId);
     }
 
-    public void deletePartner(String partnerId) {
-        orderRepository.deletePartner(partnerId);
+    public void deletePartnerById(String partnerId){
+        orderRepository.deletePartnerById(partnerId);
     }
 
-    public void deleteOrder(String orderId) {
-        orderRepository.deleteOrder(orderId);
+    public void deleteOrderById(String orderId){
+        orderRepository.deleteOrderById(orderId);
     }
+
+
+
+
+
 
 
 }
